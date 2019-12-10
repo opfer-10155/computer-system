@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include <string.h>
 
 #define MAX_VALUE 1000000000
 #define MAX_LEN 1000000000
@@ -8,13 +9,29 @@ int bucket[MAX_VALUE];
 int array[MAX_LEN];
 
 int max(int *array, int array_size) {
-  int max = INT32_MIN;
+  int m = INT32_MIN;
   for (int i=0; i < array_size; i++) {
-    if (max < array[i]) {
-      max = array[i];
+    if (m < array[i]) {
+      m = array[i];
     }
   }
-  return max;
+  return m;
+}
+
+int min_i(int *array, int array_size) {
+  int m_i = 0;
+  for (int i=1; i < array_size; i++) {
+    if (array[m_i] > array[i]) {
+      m_i = i;
+    }
+  }
+  return m_i;
+}
+
+void swap(int *a, int *b) {
+  int tmp = *a;
+  *a = *b;
+  *b = tmp;
 }
 
 void print_array(int *array, int n) {
@@ -54,28 +71,14 @@ void bucket_sort(int *array, int array_size) {
   }
 }
 
-// x^n ただし n >= 0
-int my_pow(int x, int n) {
-  if (n <= 0) return 1;
-  else return x * my_pow(x, n-1);
-}
-
-// xの10^rの位の数を取り出す
-int radix_number(int x, int r) {
-  int tmp = x % my_pow(10, r+1);
-  return tmp / my_pow(10, r);
-}
-
-void radix_sort(int *array, int array_size) {
-  int m = max(array, array_size);
-  if (m > MAX_VALUE) {
-    fprintf(stderr, "array has value which exceed 1000000000");
-    exit(1);
+void selection_sort(int *array, int array_size) {
+  for (int i=0; i < array_size-1; i++) {
+    // i番目以降の要素の最大値のインデックス
+    int m_i = min_i(array+i, array_size-i) + i;
+    swap(array+i, array+m_i);
   }
-
-
-  
 }
+
 
 // just a joke
 // ソートされていない要素を粛清することでソートされた配列を生み出す
@@ -97,9 +100,27 @@ int main() {
   for (int i=0; i < n; i++) {
     scanf("%d", array + i);
   }
-  // puts("bucket sort");
-  // bucket_sort(array, n);
-  // print_array(array, n);
+
+  size_t array_size = sizeof(array[0]) * n;
+
+  int *cp_array = malloc(array_size);
+  memcpy(cp_array, array, array_size);
+  puts("bucket sort");
+  bucket_sort(cp_array, n);
+  print_array(cp_array, n);
+  puts("");
+
+  memcpy(cp_array, array, array_size);
+  puts("original array");
+  print_array(cp_array, n);
+  puts("");
+
+  puts("selection sort");
+  selection_sort(cp_array, n);
+  print_array(cp_array, n);
+  free(cp_array);
+  puts("");
+
   puts("just a joke");
   puts("stalin sort");
   stalin_sort(array, &n);

@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<time.h>
 
 double my_random() {
   return (rand() * 1.0) / RAND_MAX;
@@ -24,6 +25,7 @@ int monte_calro(int n, double *pi) {
 }
 
 int main() {
+  srand((unsigned)time(NULL));
   int n;
   scanf("%d", &n);
 
