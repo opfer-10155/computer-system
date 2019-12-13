@@ -1,0 +1,30 @@
+typedef struct list_t{
+  int val;
+  struct list_t *next;
+} list_t;
+
+typedef struct {
+  list_t *head;
+  list_t *tail;
+} queue_t;
+
+構造体queue_tは、キューの先頭要素と末尾要素へのポインタを持つ。
+各要素は、その値と、次の要素へのポインタを持つ。
+
+・エンキュー
+1. queueのtailのnextを、挿入する値を持ち、nextがNULLのlist_tで書き換え、
+2. queueのtailを挿入したlist_tで書き換える
+
+・デキュー
+1. 取り出す値はqueueのheadが持つ値。
+2. queueのheadをその次のlist_tで書き換える。
+
+・デリート
+1. queueのheadの値が削除する値と一致すればheadをhead->nextで書き換える
+2. head->nextの値から順に見ていき、削除する値と一致する要素があれば、
+  その要素の前の要素のnextを削除する要素のnextで書き換える。
+3. 削除したら、削除した要素がheadから数えてi番目にあればiを返し、
+  削除する要素がなければ-1を返す。
+
+副作用はあるが、エンキュー,デキュー共にO(1)
+

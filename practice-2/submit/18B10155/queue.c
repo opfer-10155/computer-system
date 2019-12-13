@@ -54,6 +54,7 @@ int main() {
   return 0;
 }
 
+
 list_t *create_list(int val, list_t *next) {
   list_t *list = malloc(sizeof(list_t));
   if (list == NULL) {
