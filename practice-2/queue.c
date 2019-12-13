@@ -14,10 +14,11 @@ typedef struct {
 
 queue_t *create_queue(list_t *head, list_t *tail);
 queue_t *create_empty_queue();
-void destroy_queue(queue_t *queue);
-void print_queue(queue_t *queue);
-void enqueue(queue_t *queue, int x);
-int dequeue(queue_t *queue);
+void     destroy_queue(queue_t *queue);
+void     print_queue(queue_t *queue);
+void     enqueue(queue_t *queue, int x);
+int      dequeue(queue_t *queue);
+int      delete_queue(queue_t *queue, int val);
 
 
 int main() {
@@ -39,6 +40,13 @@ int main() {
   print_queue(queue); puts("\n");
 
   printf("[dequeue] %d <- queue\n", dequeue(queue));
+  print_queue(queue); puts("\n");
+
+  enqueue(queue, 7);
+  printf("[enqueue] %d -> queue\n", 100);
+  print_queue(queue); puts("\n");
+
+  printf("[delete] deleted %dth value\n", delete_queue(queue, 100));
   print_queue(queue); puts("");
 
 
@@ -50,6 +58,10 @@ int main() {
 
 list_t *create_list(int val, list_t *next) {
   list_t *list = malloc(sizeof(list_t));
+  if (list == NULL) {
+    fprintf(stderr, "failed to get memory");
+    exit(1);
+  }
   list->val = val;
   list->next = next;
   return list;
@@ -57,15 +69,6 @@ list_t *create_list(int val, list_t *next) {
 
 list_t *add_list(list_t *list, int x) {
   return create_list(x, list);
-}
-
-
-list_t *create_list_from_array(int *data, int n) {
-  if (n <= 0) return NULL;
-  list_t *list = malloc(sizeof(list_t));
-  list->val = data[0];
-  list->next = create_list_from_array(data+1, n-1);
-  return list;
 }
 
 void print_list(list_t *list) {
@@ -77,6 +80,10 @@ void print_list(list_t *list) {
 
 queue_t *create_queue(list_t *head, list_t *tail) {
   queue_t *queue = malloc(sizeof(queue_t));
+  if (queue == NULL) {
+    fprintf(stderr, "failed to get memory");
+    exit(1);
+  }
   queue->head = head;
   queue->tail = tail;
   return queue;
@@ -142,6 +149,32 @@ int dequeue(queue_t *queue) {
   return val;
 }
 
+int delete_queue(queue_t *queue, int val) {
+  if (queue == NULL || queue->head == NULL) {
+    return -1;
+  }
+  list_t *head = queue->head;
+  list_t *tail = queue->tail;
+  if (head->val == val) {
+    queue->head = head->next;
+    return 0;
+  }
+  list_t *prev = head;
+  list_t *list = head->next;
+  int i=1;
+  while (1) {
+    if (list == NULL) return -1;
+    if (list->val == val) {
+      prev->next = list->next;
+      return i;
+    }
+    if (list == tail) return -1;
+    prev = list;
+    list = list->next;
+    i++;
+  }
+}
+
 void destroy_queue(queue_t *queue) {
   list_t *head = queue->head;
   list_t *tail = queue->tail;
@@ -152,5 +185,6 @@ void destroy_queue(queue_t *queue) {
       if (head == tail) break;
       head = head->next;
     }
+    free(queue);
   }
 }
