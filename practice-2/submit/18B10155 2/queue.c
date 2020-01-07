@@ -139,8 +139,8 @@ void enqueue(queue_t *queue, int x) {
 
 int dequeue(queue_t *queue) {
   if (queue == NULL || queue->head == NULL) {
-    fprintf(stderr, "[WARN] dequeue empty queue.\n");
-    return -1;
+    fprintf(stderr, "[ERROR] you can't dequeue empty queue.\n");
+    exit(1);
   }
   int val = queue->head->val;
   queue->head = queue->head->next;
