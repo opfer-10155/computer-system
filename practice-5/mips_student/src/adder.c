@@ -22,7 +22,7 @@ void rca(Word in1, Word in2, Signal carry_in, Word *out1, Signal *carry_out)
     /* Excercise 5-3 */
     for (int i = 0; i < 32; i++) {
         full_adder(in1.bit[i], in2.bit[i], carry_in, out1->bit+i, carry_out);
-        carry_in = *carry_out
+        carry_in = *carry_out;
     }
 }
 
