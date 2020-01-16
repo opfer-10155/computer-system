@@ -9,7 +9,7 @@ void and_gate(Signal in1, Signal in2, Signal *out1)
 void or_gate(Signal in1, Signal in2, Signal *out1)
 {
     /* Exercise 5-1 */
-    *out1 = in1 || in2
+    *out1 = in1 || in2;
 }
 
 void not_gate(Signal in1, Signal *out1)
@@ -33,7 +33,7 @@ void xor_circuit(Signal in1, Signal in2, Signal *out1)
     or_gate(in1, in2, &inner2);
     not_gate(inner2, &inner2);
 
-    and_gate(inner1, inner2, out1);
+    or_gate(inner1, inner2, out1);
     not_gate(*out1, out1);
 }
 

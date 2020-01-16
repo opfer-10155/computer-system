@@ -79,3 +79,7 @@ void test_register_file();
 void test_inst_memory();
 void test_data_memory();
 void test_MIPS();
+
+// void pfa(Signal in1, Signal in2, Signal carry_in, Signal *g, Signal *p, Signal *s);
+void int_to_word(int x, Word *a);
+void word_print(Word a);

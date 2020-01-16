@@ -3,13 +3,17 @@
 int main()
 {
     /* Exercise 5-1 */
-    test_gate();
+    // test_gate();
 
     /* Exercise 5-2 */
-    /* test_full_adder(); */
+    // test_full_adder();
 
     /* Exercise 5-3 */
-    /* test_rca(100, 200); */
+    // test_rca(-200, 200);
+    // test_rca(0, 1);
+    // test_rca(8, 16);
+    // test_rca(100, -68);
+    // test_rca(-1, 0);
 
     /* Exercise 6-1 */
     /* test_alu(); */
@@ -24,6 +28,6 @@ int main()
 
     /* Exercise 8-1 */
     /* test_mips(); */
-    
+
     return 0;
 }
