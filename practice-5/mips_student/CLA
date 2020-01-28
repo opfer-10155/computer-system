@@ -1,0 +1,24 @@
+// void pfa(Signal a, Signal b, Signal carry_in, Signal *g, Signal *p, Signal *s) {
+//     and_gate(a, b, &g);
+//     or_gate(a, b, &p);
+//     Signal inner1;
+//     xor_circuit(a, b, &inner1);
+//     xor_circuit(inner1, carry_in, &s);
+// }
+
+// void cla(Signal g0, Signal p0, Signal g1, Signal p1, Signal g2, Signal p2, Signal g3, Signal p3, Signal carry_in,
+//             Signal *c1, Signal *c2, Signal *c3, Signal *carry_out, Signal G, Signal P)
+//     {
+//         Signal inner0;
+//         and_gate(p0, carry_in, &inner0);
+//         or_gate(g0, inner0, c1);
+
+//         and_gate(p1, c1, &inner0);
+//         or_gate(g1, inner0, c2);
+
+//         and_gate(p2, c2, &inner0);
+//         or_gate(g2, inner0, c3);
+
+//         and_gate(p3, c3, &inner0);
+//         or_gate(g3, inner0, carry_out);
+//     }

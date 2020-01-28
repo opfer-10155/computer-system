@@ -4,7 +4,8 @@
 void register_run(Register *reg, Signal wctl, Word wdata, Word *rdata)
 {
     /* Exercise 7-1 */
-    word_set_value(Word *w, int val)
+    word_set_value(rdata, reg->val);
+    if (wctl == 1) word_set_value(rdata, word_get_value(wdata));
 }
 
 void register_set_value(Register *reg, int val)
@@ -27,11 +28,27 @@ void decorder5(Signal a[5], Word *b)
         }
     }
     /* Exercise 7-1 */
+    for(i=0; i<32; i++) {
+        if (i == val) {
+            b->bit[i] = 1;
+        }
+        else {
+            b->bit[i] = 0;
+        }
+    }
 }
 
 void mux32(Word ins[32], Signal ctls[5], Word *out)
 {
     /* Exercise 7-1 */
+    int i, val;
+    val = 0;
+    for (i = 0; i < 5; ++i) {
+        if (ctls[i]) {
+            val += (1 << i);
+        }
+    }
+    *out = ins[val];
 }
 
 void register_file_run(RegisterFile *rf, Signal register_write, Signal *read1, Signal *read2, Signal *write1, Word wdata, Word *rdata1, Word *rdata2)

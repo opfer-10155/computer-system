@@ -9,11 +9,11 @@ int main()
     // test_full_adder();
 
     /* Exercise 5-3 */
-    // test_rca(-200, 200);
-    // test_rca(0, 1);
-    // test_rca(8, 16);
-    // test_rca(100, -68);
-    // test_rca(-1, 0);
+    test_rca(-200, 200);
+    test_rca(0, 1);
+    test_rca(8, 16);
+    test_rca(100, -68);
+    test_rca(-1, 0);
 
     /* Exercise 6-1 */
     /* test_alu(); */
