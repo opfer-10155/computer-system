@@ -7,8 +7,8 @@ SRC = ./src
 OBJ = ./obj
 
 OBJ_TEST = $(OBJ)/test.o
-OBJS = $(OBJ)/word.o $(OBJ)/gate.o $(OBJ_TEST) $(OBJ)/adder.o $(OBJ)/alu.o
-#  $(OBJ)/reg_file.o $(OBJ)/memory.o $(OBJ)/control_unit.o $(OBJ)/mips.o
+OBJS = $(OBJ)/word.o $(OBJ)/gate.o $(OBJ_TEST) $(OBJ)/adder.o $(OBJ)/alu.o $(OBJ)/reg_file.o $(OBJ)/memory.o 
+# $(OBJ)/control_unit.o $(OBJ)/mips.o
 
 all:
 	make test

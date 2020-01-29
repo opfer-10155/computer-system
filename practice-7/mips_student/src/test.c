@@ -17,15 +17,15 @@ int main()
 
     /* Exercise 6-1 */
     // test_alu();
-    test_alu32(100, 200);
-    test_alu32(1, 0);
-    test_alu32(__INT32_MAX__-20000, 30000);
-    test_alu32(__INT32_MAX__-20000, -30000);
-    test_alu32(-(__INT32_MAX__-20000), 30000);
-    test_alu32(-(__INT32_MAX__-20000), -30000);
+    // test_alu32(100, 200);
+    // test_alu32(1, 0);
+    // test_alu32(__INT32_MAX__-20000, 30000);
+    // test_alu32(__INT32_MAX__-20000, -30000);
+    // test_alu32(-(__INT32_MAX__-20000), 30000);
+    // test_alu32(-(__INT32_MAX__-20000), -30000);
     // printf("%d\n", -(__INT32_MAX__-20000) < 30000); 1だった
     /* Exercise 7-1 */
-    /* test_register_file(); */
+    test_register_file();
 
     /* Exercise 7-2 */
     /* test_inst_memory(); */

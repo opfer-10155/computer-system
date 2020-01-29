@@ -91,5 +91,4 @@ void test_register_file()
     printf("old data of rdata1: %d\n", word_get_value(rdata1));
     register_file_run(&rf, register_write, read1, read2, write1, wdata, &rdata1, &rdata2);
     printf("new data of rdata1: %d\n", word_get_value(rdata1));
-
 }
