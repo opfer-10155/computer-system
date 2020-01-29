@@ -59,14 +59,19 @@ void register_file_run(RegisterFile *rf, Signal register_write,
     Word reg_write_num;
     decorder5(write1, &reg_write_num);
 
+    Word ins[32];
+
     // $zero
-    register_run(rf->r, 0, wdata, rdata1);
+    register_run(rf->r, 0, wdata, ins);
 
     for(int i=1; i<32; i++) {
         Signal inner1;
         and_gate(register_write, reg_write_num.bit[i], &inner1);
-        register_run(rf->r+i, inner1, wdata, );
+        register_run(rf->r+i, inner1, wdata, ins+i);
     }
+
+    mux32(ins, read1, rdata1);
+    mux32(ins, read2, rdata2);
 }
 
 void test_register_file()
@@ -82,7 +87,7 @@ void test_register_file()
     word_set_value(&wdata, 100);
 
     register_file_run(&rf, register_write, read1, read2, write1, wdata, &rdata1, &rdata2);
-    
+
     printf("old data of rdata1: %d\n", word_get_value(rdata1));
     register_file_run(&rf, register_write, read1, read2, write1, wdata, &rdata1, &rdata2);
     printf("new data of rdata1: %d\n", word_get_value(rdata1));
