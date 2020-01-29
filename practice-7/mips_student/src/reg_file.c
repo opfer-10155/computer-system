@@ -51,9 +51,22 @@ void mux32(Word ins[32], Signal ctls[5], Word *out)
     *out = ins[val];
 }
 
-void register_file_run(RegisterFile *rf, Signal register_write, Signal *read1, Signal *read2, Signal *write1, Word wdata, Word *rdata1, Word *rdata2)
+void register_file_run(RegisterFile *rf, Signal register_write,
+                        Signal *read1, Signal *read2, Signal *write1, Word wdata,
+                        Word *rdata1, Word *rdata2)
 {
     /* Exercise 7-1 */
+    Word reg_write_num;
+    decorder5(write1, &reg_write_num);
+
+    // $zero
+    register_run(rf->r, 0, wdata, rdata1);
+
+    for(int i=1; i<32; i++) {
+        Signal inner1;
+        and_gate(register_write, reg_write_num.bit[i], &inner1);
+        register_run(rf->r+i, inner1, wdata, );
+    }
 }
 
 void test_register_file()
